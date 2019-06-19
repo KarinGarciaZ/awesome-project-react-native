@@ -3,13 +3,16 @@ import { StyleSheet, View, } from 'react-native';
 import Items from './src/components/Items/items';
 import AddPlaces from './src/components/Form/AddPlaces';
 import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
-export default App = () => {
+import { connect } from 'react-redux';
 
-  let [inputArr, setInputArr] = useState([])
+
+const App = () => {
+
+  let [items, setItems] = useState([])
   let [showModal, setShowModal] = useState(null)
 
   const onClickButton = (value) => {
-    let temp = [...inputArr];
+    let temp = [...items];
     temp.push({
       key: Math.random(), 
       value, 
@@ -17,19 +20,19 @@ export default App = () => {
         uri:'https://cdn.muenchen-p.de/.imaging/stk/responsive/galleryLarge/dms/shutterstock/neues-rathaus-marienplatz/document/neues-rathaus-marienplatz.jpg'
       }
     })
-    setInputArr( temp )
+    setItems( temp )
   }
 
   const onPressItem = (key) => {
-    let temp = [...inputArr];
+    let temp = [...items];
     let showModalEl = temp.find(item => item.key === key )
     setShowModal( showModalEl )
   }
 
   const onDeleteItem = (key) => {
-    let temp = [...inputArr];
+    let temp = [...items];
     temp = temp.filter(item => item.key !== key )
-    setInputArr( [...temp] )
+    setItems( [...temp] )
     setShowModal( null )
   }
 
@@ -41,7 +44,7 @@ export default App = () => {
     <View style={styles.container}>
       <PlaceDetail itemToShow={showModal} onClose={onCloseModal} onDelete={onDeleteItem} />
       <AddPlaces clicked={onClickButton} />
-      <Items items={inputArr} pressItem={onPressItem}></Items>
+      <Items items={items} pressItem={onPressItem}></Items>
     </View>
   );
 }
@@ -54,3 +57,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
 });
+
+const mapStateToProps = state => {
+  
+}
+
+export default connect()(App)
