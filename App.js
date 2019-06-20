@@ -4,24 +4,17 @@ import Items from './src/components/Items/items';
 import AddPlaces from './src/components/Form/AddPlaces';
 import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
 
-import PlacesContext from './src/store/contexts/placesContext';
-import placesReducer from './src/store/reducers/placesReducer';
+import PlacesProvider from './src/store/providers/placesProvider';
 
 export default App = () => {
 
-  const initialState = {
-    places: [],
-    selectedPlace: null
-  }
-  const placesContextValue = useReducer( placesReducer, initialState )
-
   return (
     <View style={styles.container}>
-      <PlacesContext.Provider value={placesContextValue}>
+      <PlacesProvider>
         <PlaceDetail />
         <AddPlaces />
         <Items />
-      </PlacesContext.Provider>
+      </PlacesProvider>
     </View>
   );
 }
