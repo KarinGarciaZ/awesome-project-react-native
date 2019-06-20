@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PlacesContext from '../../store/contexts/places';
 import { 
   Text, 
   View, 
@@ -7,17 +8,25 @@ import {
   Image
 } from 'react-native';
 
-const listItem = props => (
-  <TouchableWithoutFeedback onPress={props.onItemPressed}>
-    <View style={styles.listItem}>
-      <Image source={props.placeImage} style={styles.placeImage}/>
-      <Text style={styles.placeName}>
-        {props.placeName}
-      </Text>
-    </View>
-  </TouchableWithoutFeedback>
+const listItem = props => {
+
+  let [ status, dispatch ] = useContext(PlacesContext)
+
+  let onSelect = () => {
+    dispatch({type:'SELECT_PLACE', payload: props.id})
+  }
   
-)
+  return (
+    <TouchableWithoutFeedback onPress={onSelect}>
+      <View style={styles.listItem}>
+        <Image source={props.placeImage} style={styles.placeImage}/>
+        <Text style={styles.placeName}>
+          {props.placeName}
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
+  )
+}
 
 const styles = StyleSheet.create({
   listItem: {

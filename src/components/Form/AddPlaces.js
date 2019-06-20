@@ -1,17 +1,19 @@
-import React, {useState} from 'react'
+import React, {useState, useContext } from 'react';
+import PlacesContext from '../../store/contexts/places';
 import {View, 
   StyleSheet, 
   Button, 
   TextInput
 } from 'react-native'
 
-export default AddPlaces = props => {
+export default AddPlaces = () => {
 
   let [inputVal, setInputVal] = useState('')
-
+  const [ state, dispatch ] = useContext(PlacesContext)
+  
   const clearValue = () => {
     if ( inputVal.trim() !== '' )
-      props.clicked(inputVal)
+      dispatch({type: 'ADD_PLACE', payload: inputVal})
   }
 
   return (
