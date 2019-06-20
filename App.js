@@ -4,8 +4,8 @@ import Items from './src/components/Items/items';
 import AddPlaces from './src/components/Form/AddPlaces';
 import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
 
-import PlacesContext from './src/store/contexts/places';
-import placesReducer from './src/store/reducers/places';
+import PlacesContext from './src/store/contexts/placesContext';
+import placesReducer from './src/store/reducers/placesReducer';
 
 export default App = () => {
 

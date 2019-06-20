@@ -1,10 +1,7 @@
 import React, {useState, useContext } from 'react';
-import PlacesContext from '../../store/contexts/places';
-import {View, 
-  StyleSheet, 
-  Button, 
-  TextInput
-} from 'react-native'
+import PlacesContext from '../../store/contexts/placesContext';
+import { addPlace } from '../../store/actions/placesActions';
+import { View, StyleSheet, Button, TextInput } from 'react-native';
 
 export default AddPlaces = () => {
 
@@ -13,7 +10,7 @@ export default AddPlaces = () => {
   
   const clearValue = () => {
     if ( inputVal.trim() !== '' )
-      dispatch({type: 'ADD_PLACE', payload: inputVal})
+      dispatch(addPlace(inputVal))
   }
 
   return (

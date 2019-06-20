@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import PlacesContext from '../../store/contexts/places';
+import PlacesContext from '../../store/contexts/placesContext';
+import { selectPlace } from '../../store/actions/placesActions';
 import { 
   Text, 
   View, 
@@ -13,7 +14,7 @@ const listItem = props => {
   let [ status, dispatch ] = useContext(PlacesContext)
 
   let onSelect = () => {
-    dispatch({type:'SELECT_PLACE', payload: props.id})
+    dispatch(selectPlace(props.id))
   }
   
   return (

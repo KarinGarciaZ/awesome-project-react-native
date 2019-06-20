@@ -1,17 +1,18 @@
 import React, {useContext} from 'react'
 import { Modal, View, Image, Text, Button, StyleSheet } from 'react-native'
-import PlaceContext from '../../store/contexts/places';
+import PlaceContext from '../../store/contexts/placesContext';
+import { deletePlace, deselectPlace } from '../../store/actions/placesActions';
 
 const placeDetail = props => {
 
   const [state, dispatch] = useContext(PlaceContext)
 
   const onDelete = () => {
-    dispatch({type: 'DELETE_PLACE', payload: state.selectedPlace.key})
+    dispatch(deletePlace(state.selectedPlace.key))
   }
 
   const onClose = () => {
-    dispatch({type: 'DESELECT_PLACE'})
+    dispatch(deselectPlace())
   }
 
   let modal = null;

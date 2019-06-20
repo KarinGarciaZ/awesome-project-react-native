@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import { FlatList, StyleSheet, Text, View} from 'react-native'
+import { FlatList, StyleSheet, Text } from 'react-native'
 import ListItem from '../ListItem/ListItem'
-import PlacesContext from '../../store/contexts/places';
+import PlacesContext from '../../store/contexts/placesContext';
 
 export default items = props => {
 
