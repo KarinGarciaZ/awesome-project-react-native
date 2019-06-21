@@ -64,7 +64,17 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    alignItems:'center'
+    alignItems:'center',
+    justifyContent: 'center',
+    backgroundColor: '#EEE',    
+    borderRadius: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    padding: 5
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
   }
 })
 
