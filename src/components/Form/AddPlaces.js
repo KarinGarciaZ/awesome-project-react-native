@@ -1,7 +1,8 @@
 import React, {useState, useContext } from 'react';
 import PlacesContext from '../../store/contexts/placesContext';
 import { addPlace } from '../../store/actions/placesActions';
-import { View, StyleSheet, Button, TextInput } from 'react-native';
+import { View, StyleSheet, Button, TextInput, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default AddPlaces = () => {
 
@@ -21,12 +22,11 @@ export default AddPlaces = () => {
       style={styles.placeInput}
       placeholder='A nice'
       />
-      <Button
-        onPress={clearValue}
-        title="Learn More"
-        color="#841584"
-        style={styles.placeButton}
-      />        
+      <TouchableOpacity onPress={clearValue}>
+        <View style={styles.placeButton}>
+          <Icon size={25} name="save" color='white' />
+        </View>
+      </TouchableOpacity>    
     </View> 
   )
 }
@@ -37,15 +37,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     alignSelf: 'stretch',
-    justifyContent: 'space-around'
   },
   placeInput: {
     backgroundColor: '#EEE',
     paddingLeft: 10,
-    flex: 3,
+    flex: 1,
     margin: 10,
+    borderRadius: 5
   },
   placeButton: {
-    flex: 1
+    marginLeft: 10,
+    marginRight: 10,
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 100
   }
 })
