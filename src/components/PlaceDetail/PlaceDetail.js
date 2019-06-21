@@ -24,12 +24,13 @@ const placeDetail = props => {
         <View style={styles.modalContainer}>
           <Image source={state.selectedPlace.image} style={styles.image}/>
           <Text style={styles.title}>{state.selectedPlace.value}</Text>
-          <View>
-            <TouchableOpacity onPress={onDelete}>
-              <Icon size={30} name="trash" />
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={onDelete} style={styles.button}>
+              <Icon color='red' size={30} name="trash" />
             </TouchableOpacity>
-            <Button title='Delete' color='red' style={styles.button} onPress={onDelete}/>
-            <Button title='close' color='gray' style={styles.button} onPress={onClose}/>
+            <TouchableOpacity onPress={onClose} style={styles.button}>
+              <Text style={{color: 'blue'}}>Close</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -56,8 +57,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',    
     alignSelf: 'center',
   },
+  buttonContainer: {
+    flexDirection: 'row',   
+    marginTop: 15, 
+    justifyContent: 'center'
+  },
   button: {
-    marginTop: 15,
+    flex: 1,
+    alignItems:'center'
   }
 })
 
