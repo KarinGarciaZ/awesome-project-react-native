@@ -1,5 +1,7 @@
 import React, {useContext} from 'react'
-import { Modal, View, Image, Text, Button, StyleSheet } from 'react-native'
+import { Modal, View, Image, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import PlaceContext from '../../store/contexts/placesContext';
 import { deletePlace, deselectPlace } from '../../store/actions/placesActions';
 
@@ -23,8 +25,11 @@ const placeDetail = props => {
           <Image source={state.selectedPlace.image} style={styles.image}/>
           <Text style={styles.title}>{state.selectedPlace.value}</Text>
           <View>
+            <TouchableOpacity onPress={onDelete}>
+              <Icon size={30} name="trash" />
+            </TouchableOpacity>
             <Button title='Delete' color='red' style={styles.button} onPress={onDelete}/>
-            <Button title='close' style={styles.button} onPress={onClose}/>
+            <Button title='close' color='gray' style={styles.button} onPress={onClose}/>
           </View>
         </View>
       </Modal>
