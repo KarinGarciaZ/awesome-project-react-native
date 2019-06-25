@@ -7,15 +7,14 @@ export default items = props => {
 
   const [state, dispatch] = useContext(PlacesContext)
 
-  let places = [...state.places]
-  places = places.map( place => (<Text>{place.value}</Text>) )
-
   return (
     <FlatList 
       style={styles.containerWrapper}
       data={state.places}
+      keyExtractor = { (item, index) => index.toString() }
       renderItem={(info) => (
         <ListItem 
+          key={info.item.key}
           placeName={info.item.value}
           placeImage={info.item.image}    
           id={info.item.key}      
