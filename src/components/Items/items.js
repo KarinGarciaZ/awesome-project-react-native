@@ -17,7 +17,8 @@ export default items = props => {
           key={info.item.key}
           placeName={info.item.value}
           placeImage={info.item.image}    
-          id={info.item.key}      
+          id={info.item.key}   
+          {...props}   
         />
       )}
     />

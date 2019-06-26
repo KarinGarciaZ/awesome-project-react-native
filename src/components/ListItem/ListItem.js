@@ -15,6 +15,7 @@ const listItem = props => {
 
   let onSelect = () => {
     dispatch(selectPlace(props.id))
+    props.navigation.navigate('PlaceDetail')
   }
   
   return (
@@ -22,7 +23,7 @@ const listItem = props => {
       <View style={styles.listItem}>
         <Image source={props.placeImage} style={styles.placeImage}/>
         <Text style={styles.placeName}>
-          {props.placeName}
+          {props.placeName} - {props.id}
         </Text>
       </View>
     </TouchableWithoutFeedback>
