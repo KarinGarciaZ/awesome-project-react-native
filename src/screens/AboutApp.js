@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
-const AboutApp = () => {
+import Header from '../components/Shared/Header';
+
+const AboutApp = props => {
   return(
     <View>
-      <Text>App created by karin</Text>
+      <Header>
+        <Text>About</Text>
+      </Header>
     </View>
   )
 }
