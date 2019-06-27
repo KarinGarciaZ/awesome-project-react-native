@@ -36,9 +36,6 @@ const AppNavigator = createBottomTabNavigator(
           case 'Home':
             icon = <Icon name="home" size={25} color={tintColor} />
             break;
-          case 'PlaceDetail':
-            icon = <Icon name="home" size={25} color={tintColor} />
-            break;
           case 'About':
             icon = <Icon name="info-circle" size={25} color={tintColor} />
             break;
@@ -52,8 +49,8 @@ const AppNavigator = createBottomTabNavigator(
       },
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray',
+      activeTintColor: '#333',
+      inactiveTintColor: '#999',
     },
       initialRouteName: "Home",
   }
