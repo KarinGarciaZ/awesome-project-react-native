@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import PlaceContext from '../store/contexts/placesContext';
 import { deletePlace, deselectPlace } from '../store/actions/placesActions';
+import Header from '../components/Shared/Header';
 
 const placeDetail = props => {
   
@@ -13,22 +14,36 @@ const placeDetail = props => {
     dispatch(deletePlace(state.selectedPlace.key))
   }
 
+  const onBack = () => {
+    props.navigation.goBack()
+  }
+
   let screen = null
 
   if( state.selectedPlace )  
     screen = (    
-      <View style={styles.container}>
-        <Image source={state.selectedPlace.image} style={styles.image}/>
-        <Text style={styles.title}>{state.selectedPlace.value}</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={onDelete} style={styles.button}>
-            <Icon color='red' size={30} name="trash" />
+      <View>
+        <Header>
+          <TouchableOpacity onPress={onBack}>
+            <Icon size={20} name="arrow-left" color='#444'/>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={{color: 'blue'}}>Close</Text>
-          </TouchableOpacity>
+          <Text>Details</Text>
+          <View></View>
+        </Header>
+        <View style={styles.container}>
+          <Image source={state.selectedPlace.image} style={styles.image}/>
+          <Text style={styles.title}>{state.selectedPlace.value}</Text>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={onDelete} style={styles.button}>
+              <Icon color='red' size={30} name="trash" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={onBack} >
+              <Text style={{color: 'blue'}}>Close</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
+      
     )
   else
     props.navigation.navigate('Home')
