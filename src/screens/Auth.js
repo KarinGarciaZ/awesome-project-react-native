@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Button, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Colors from '../assets/styles/colors';
+import { Colors } from '../assets/staticStyles';
 
 const Auth = (props) => {
 
