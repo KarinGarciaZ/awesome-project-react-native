@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Colors } from '../assets/staticStyles';
 import backgroundImage from '../assets/background.jpg';
 import Input from '../components/Shared/Authenticate/input';
+import ButtonAuth from '../components/Shared/Authenticate/button';
 
 const Auth = (props) => {
 
@@ -30,11 +31,7 @@ const Auth = (props) => {
 
             <Input iconName="lock" placeholder="Password..."/>
 
-            <TouchableOpacity onPress={ logged } style={{marginTop: 30}}>
-              <View style={{ ...styles.inputContainer, marginTop: 0, ...styles.buttonForm }}>
-                <Text style={{ color: Colors.grayOne, fontSize: 23, fontWeight: '400'}}>Login</Text>  
-              </View> 
-            </TouchableOpacity>    
+            <ButtonAuth text="Login" pressed={logged}/> 
 
             <View style={styles.separator}>    
               <View style={styles.separatorLine} />      
@@ -42,11 +39,7 @@ const Auth = (props) => {
               <View style={styles.separatorLine} />     
             </View>  
 
-            <TouchableOpacity onPress={ toSign } style={{marginTop: 20}}>
-              <View style={{ ...styles.inputContainer, marginTop: 0, ...styles.buttonForm }}>
-                <Text style={{ color: Colors.grayOne, fontSize: 23, fontWeight: '400'}}>Sign in</Text>  
-              </View> 
-            </TouchableOpacity>  
+            <ButtonAuth text="Sign in" pressed={toSign}/>
 
           </View>   
         </ScrollView>           
@@ -73,13 +66,6 @@ const styles = StyleSheet.create({
     color: Colors.grayOne,
     fontSize: 18,
     fontWeight: '300'
-  },
-  buttonForm: {
-    paddingTop: 10, 
-    paddingBottom: 10,
-    borderWidth: 2,    
-    minWidth: '80%',    
-    backgroundColor: '#111111AA'
   },
   separator: {
     flexDirection: 'row',
