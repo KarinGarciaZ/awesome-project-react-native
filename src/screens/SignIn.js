@@ -59,8 +59,8 @@ const SignIn = (props) => {
             </View> 
 
             <TouchableOpacity onPress={ logged } style={{marginTop: 20}}>
-              <View style={{ ...styles.inputContainer, marginTop: 0, ...styles.buttonForm }}>
-                <Text style={{ color: Colors.grayOne, fontSize: 23, fontWeight: '400'}}>Sign in</Text>  
+              <View style={{ ...styles.inputContainer, marginTop: 20, ...styles.buttonForm }}>
+                <Text style={{ color: Colors.grayOne, fontSize: 23, fontWeight: '400'}}>Create Account</Text>  
               </View> 
             </TouchableOpacity>  
 
@@ -75,14 +75,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#888',
   },
   formContainer: {
     alignItems: 'center',
     backgroundColor: 'transparent',
     minHeight: '100%',
     justifyContent: 'center',
-    minWidth: '90%',
   },
   textForm: {
     color: Colors.grayOne,
@@ -96,8 +94,9 @@ const styles = StyleSheet.create({
     padding: 0,
     paddingLeft: 10,
     borderWidth: 1,
-    borderColor: Colors.grayOne,
-    minWidth: '90%',
+    borderColor: Colors.grayOne,     
+    backgroundColor: '#11111155',
+    minWidth: '85%',
     borderRadius: 3
   },
   inputLogin: {
@@ -114,6 +113,8 @@ const styles = StyleSheet.create({
     paddingTop: 10, 
     paddingBottom: 10,
     borderWidth: 2,
+    minWidth: '60%',
+    backgroundColor: '#11111111'
   },
 })
 
