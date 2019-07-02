@@ -7,7 +7,9 @@ import { Colors } from '../../../assets/staticStyles';
 const Input = props => {
   return(
     <View style={{...styles.inputContainer, marginTop: 15}}>
-      <Icon size={25} name={props.iconName} style={styles.loginIcon}/>
+      <View style={styles.iconContainer}>
+        <Icon size={25} name={props.iconName} style={styles.icon}/>
+      </View>
       <TextInput 
         placeholder={props.placeholder}             
         placeholderTextColor={Colors.grayOne} 
@@ -23,7 +25,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
-    paddingLeft: 10,
     borderWidth: 1,
     borderColor: Colors.grayOne,    
     backgroundColor: '#11111155',
@@ -36,9 +37,13 @@ const styles = StyleSheet.create({
     borderColor: Colors.grayOne,
     paddingLeft: 15,
   },
-  loginIcon: {
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: 45,
+  },
+  icon: {
     color: Colors.grayOne,
-    minWidth: 35,
   },
 })
 
