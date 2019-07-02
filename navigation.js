@@ -6,10 +6,12 @@ import HomeScreen from './src/screens/Home';
 import AboutAppScreen from './src/screens/AboutApp';
 import PlaceDetailScreen from './src/screens/PlaceDetail';
 import AuthScreen from './src/screens/Auth';
+import SignInScreen from './src/screens/SignIn';
 
 const AppNavigator = createStackNavigator(
   {
     Auth: AuthScreen,
+    SignIn: SignInScreen,
     Home: {
       screen: createBottomTabNavigator(
         // {
