@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     padding: 0,
     borderWidth: 1,
     borderColor: Colors.grayOne,    
-    backgroundColor: '#11111155',
+    backgroundColor: Colors.grayTransparent2,
     borderRadius: 3
   },
   inputLogin: {

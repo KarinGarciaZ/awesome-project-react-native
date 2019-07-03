@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import PlaceContext from '../store/contexts/placesContext';
 import { deletePlace, deselectPlace } from '../store/actions/placesActions';
+import { Colors } from '../assets/staticStyles';
 import Header from '../components/Shared/Header';
 
 const placeDetail = props => {
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems:'center',
     justifyContent: 'center',
-    backgroundColor: '#EEE',    
+    backgroundColor: Colors.grayBackground,    
     borderRadius: 5,
     marginLeft: 5,
     marginRight: 5,

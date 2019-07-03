@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import PlacesContext from '../../store/contexts/placesContext';
-import { selectPlace } from '../../store/actions/placesActions';
 import { 
   Text, 
   View, 
@@ -8,6 +6,10 @@ import {
   TouchableWithoutFeedback,
   Image
 } from 'react-native';
+
+import { Colors } from '../../assets/staticStyles';
+import PlacesContext from '../../store/contexts/placesContext';
+import { selectPlace } from '../../store/actions/placesActions';
 
 const listItem = props => {
 
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
   listItem: {
     padding: 10,
     margin: 4,
-    backgroundColor: '#ddd',
+    backgroundColor: Colors.grayBackground,
     flexDirection: 'row',
     alignItems: 'center'
   },

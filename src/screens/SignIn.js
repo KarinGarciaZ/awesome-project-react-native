@@ -56,13 +56,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '300'
   },
-  buttonForm: {
-    paddingTop: 10, 
-    paddingBottom: 10,
-    borderWidth: 2,
-    minWidth: '80%',
-    backgroundColor: '#11111111'
-  },
 })
 
 export default SignIn;
