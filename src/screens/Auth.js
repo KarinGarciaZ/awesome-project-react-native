@@ -23,7 +23,7 @@ const Auth = (props) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.formContainer}>
 
-            <Icon size={100} name="paw" style={{color: Colors.grayOne, marginBottom: 30}}/>
+            <Icon size={100} name="instagram" style={{color: Colors.grayOne, marginBottom: 30}}/>
 
             <Text style={{...styles.textForm, marginBottom: 35}}>Get connected with the best app for travelers</Text>
 
