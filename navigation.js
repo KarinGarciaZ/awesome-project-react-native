@@ -7,6 +7,7 @@ import AboutAppScreen from './src/screens/AboutApp';
 import PlaceDetailScreen from './src/screens/PlaceDetail';
 import AuthScreen from './src/screens/Auth';
 import SignInScreen from './src/screens/SignIn';
+import SharePlace from './src/screens/SharePlace';
 
 const AppNavigator = createStackNavigator(
   {
@@ -14,11 +15,6 @@ const AppNavigator = createStackNavigator(
     SignIn: SignInScreen,
     Home: {
       screen: createBottomTabNavigator(
-        // {
-        //   Home:  HomeScreen,
-        //   PlaceDetail: PlaceDetailScreen,
-        //   About: AboutAppScreen
-        // },
         {
           Home: {
             screen: createStackNavigator(
@@ -32,7 +28,8 @@ const AppNavigator = createStackNavigator(
               }
             )
           },
-          About: AboutAppScreen  
+          About: AboutAppScreen,
+          SharePlace: SharePlace
         },
         {
           defaultNavigationOptions: ({ navigation }) => ({
@@ -45,6 +42,9 @@ const AppNavigator = createStackNavigator(
                   break;
                 case 'About':
                   icon = <Icon name="info-circle" size={25} color={tintColor} />
+                  break;
+                case 'SharePlace':
+                  icon = <Icon name="share" size={25} color={tintColor} />
                   break;
                 default:
                   icon = <Icon name="info-circle" size={25} color={tintColor} />
