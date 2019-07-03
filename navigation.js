@@ -1,5 +1,5 @@
 import React from "react";
-import { createBottomTabNavigator, createAppContainer, createStackNavigator } from "react-navigation";
+import { createBottomTabNavigator, createAppContainer, createStackNavigator, createDrawerNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './src/screens/Home';
@@ -8,6 +8,7 @@ import PlaceDetailScreen from './src/screens/PlaceDetail';
 import AuthScreen from './src/screens/Auth';
 import SignInScreen from './src/screens/SignIn';
 import SharePlace from './src/screens/SharePlace';
+import SettingsScreen from './src/screens/Settings';
 
 const AppNavigator = createStackNavigator(
   {
@@ -28,7 +29,39 @@ const AppNavigator = createStackNavigator(
               }
             )
           },
-          About: AboutAppScreen,
+          About: {
+            screen: createDrawerNavigator(
+              {
+                About: AboutAppScreen,
+                Settings: SettingsScreen
+              },
+              {
+                defaultNavigationOptions: ({ navigation }) => ({
+                  drawerLabel: () => (navigation.state.routeName != 'About')? navigation.state.routeName: null,
+                  drawerIcon: ({ tintColor }) => {
+                    const { routeName } = navigation.state;
+                    let icon = null;
+                    switch (routeName) {
+                      case 'Settings':
+                        icon = <Icon name="cog" size={25} color={tintColor} />
+                        break;
+                      default:
+                        icon = null
+                        break;
+                    }
+            
+                    // You can return any component that you like here!
+                    return icon;
+                  },
+                }),
+                drawerPosition: 'right',
+                contentOptions: {
+                  activeTintColor: '#333',
+                  inactiveTintColor: '#999',
+                },               
+              }
+            )
+          },
           SharePlace: SharePlace
         },
         {
