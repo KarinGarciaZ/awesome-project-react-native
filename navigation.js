@@ -9,6 +9,9 @@ import AuthScreen from './src/screens/Auth';
 import SignInScreen from './src/screens/SignIn';
 import SharePlace from './src/screens/SharePlace';
 import SettingsScreen from './src/screens/Settings';
+import ProfileScreen from './src/screens/Profile';
+
+import SideDrawerProfile from './src/components/Shared/SideDrawerProfile';
 
 const AppNavigator = createStackNavigator(
   {
@@ -33,7 +36,6 @@ const AppNavigator = createStackNavigator(
             screen: createDrawerNavigator(
               {
                 About: AboutAppScreen,
-                Settings: SettingsScreen
               },
               {
                 defaultNavigationOptions: ({ navigation }) => ({
@@ -58,11 +60,49 @@ const AppNavigator = createStackNavigator(
                 contentOptions: {
                   activeTintColor: '#333',
                   inactiveTintColor: '#999',
-                },               
+                },
+                initialRouteName: 'About',    
+                overlayColor: 10, 
+              }
+            )
+          },          
+          Profile: {
+            screen: createDrawerNavigator(
+              {
+                Profile: ProfileScreen,
+                Settings: SettingsScreen
+              },
+              {
+                defaultNavigationOptions: ({ navigation }) => ({
+                  drawerLabel: () => (navigation.state.routeName != 'Profile')? navigation.state.routeName: null,
+                  drawerIcon: ({ tintColor }) => {
+                    const { routeName } = navigation.state;
+                    let icon = null;
+                    switch (routeName) {
+                      case 'Settings':
+                        icon = <Icon name="cog" size={25} color={tintColor} />
+                        break;
+                      default:
+                        icon = null
+                        break;
+                    }
+            
+                    // You can return any component that you like here!
+                    return icon;
+                  },
+                }),
+                drawerPosition: 'right',
+                contentOptions: {
+                  activeTintColor: '#333',
+                  inactiveTintColor: '#999',
+                },
+                initialRouteName: 'Profile',    
+                overlayColor: 10,
+                contentComponent: SideDrawerProfile,
               }
             )
           },
-          SharePlace: SharePlace
+          SharePlace: SharePlace,
         },
         {
           defaultNavigationOptions: ({ navigation }) => ({
@@ -75,6 +115,9 @@ const AppNavigator = createStackNavigator(
                   break;
                 case 'About':
                   icon = <Icon name="info-circle" size={25} color={tintColor} />
+                  break;
+                case 'Profile':
+                  icon = <Icon name="user" size={25} color={tintColor} />
                   break;
                 case 'SharePlace':
                   icon = <Icon name="share" size={25} color={tintColor} />
@@ -102,10 +145,6 @@ const AppNavigator = createStackNavigator(
     headerMode: 'none',
   }
 )
-
-
-
-
 
 
 const AppContainer = createAppContainer(AppNavigator);
