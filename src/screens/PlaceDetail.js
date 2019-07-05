@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react'
-import { Modal, View, Image, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { Modal, View, Image, Text, Button, StyleSheet, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import PlaceContext from '../store/contexts/placesContext';
@@ -9,7 +9,23 @@ import Header from '../components/Shared/Header';
 
 const placeDetail = props => {
   
-  const [state, dispatch] = useContext(PlaceContext)
+  const [state, dispatch] = useContext(PlaceContext);
+  const [orientation, setOrientation] = useState(Dimensions.get('window').height > 500? 'Portrait': 'Landscape')
+
+  useEffect(() => {
+    console.log('render created')
+    Dimensions.addEventListener('change', onCreateOrientationListener)
+
+    return () => {
+      Dimensions.removeEventListener('change', onCreateOrientationListener)
+      console.log('event removed')
+    }
+  }, [])
+
+  onCreateOrientationListener = ({window}) => {
+    window.height > 500? setOrientation('Portrait'): setOrientation('Landscape'); 
+    console.log('event created')
+  }
 
   const onDelete = () => {
     dispatch(deletePlace(state.selectedPlace.key))
@@ -31,18 +47,22 @@ const placeDetail = props => {
           <Text>Details</Text>
           <View></View>
         </Header>
-        <View style={styles.container}>
-          <Image source={state.selectedPlace.image} style={styles.image}/>
-          <Text style={styles.title}>{state.selectedPlace.value}</Text>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={onDelete} style={styles.button}>
-              <Icon color='red' size={30} name="trash" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={onBack} >
-              <Text style={{color: 'blue'}}>Close</Text>
-            </TouchableOpacity>
+        <ScrollView>
+          <View style={orientation === 'Landscape'? styles.containerLandscape: styles.containerPortrait}>
+            <Image source={state.selectedPlace.image} style={orientation === 'Landscape'? styles.imageLandscape: styles.imagePortrait}/>
+            <View style={orientation === 'Landscape'? {flex:2}: {}}>
+              <Text style={styles.title}>{state.selectedPlace.value}</Text>
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={onDelete} style={styles.button}>
+                  <Icon color='red' size={30} name="trash" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={onBack} >
+                  <Text style={{color: 'blue'}}>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
-        </View>
+        </ScrollView>        
       </View>
       
     )
@@ -53,12 +73,20 @@ const placeDetail = props => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 15,
+  containerPortrait: {
+    margin: 15,    
   },
-  image: {
+  containerLandscape: {
+    margin: 15,
+    flexDirection: 'row',
+  },
+  imagePortrait: {
     height: 300,
     width: '100%'
+  },
+  imageLandscape: {
+    height: 300,
+    flex: 3,
   },
   title: {
     fontSize: 24,
