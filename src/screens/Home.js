@@ -3,6 +3,7 @@ import { StyleSheet, View, Button, Text, TextInput, TouchableOpacity } from 'rea
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Items from '../components/Items/items';
+import { Colors } from '../assets/staticStyles';
 import AddPlaces from '../components/Form/AddPlaces';
 import Header from '../components/Shared/Header';
 import ContextPlaces from '../store/contexts/placesContext';
@@ -10,8 +11,9 @@ import { addPlace } from '../store/actions/placesActions';
 
 export default Home = props => {
 
-  let [search, setSearch] = useState('');
-  let [state, dispatch] = useContext(ContextPlaces)
+  let [search, setSearch] = useState('');  
+  const [itemsShown, showItems] = useState(false);
+  let [state, dispatch] = useContext(ContextPlaces);
 
   const onAddPlace = () => {
     if( search.trim() !== '' )
@@ -21,6 +23,16 @@ export default Home = props => {
   const onPressMoreAboutUs = () => {
     props.navigation.navigate('About', { name:'karin' })
   }
+
+  let buttonShow = (
+    <View style={{ flex: 1, justifyContent: 'center' }}>
+      <TouchableOpacity onPress={ () => showItems(true) } style={{marginTop: 20}}>
+        <View style={{ ...styles.buttonShow }}>
+          <Text style={{ color: Colors.garyDark, fontSize: 23, fontWeight: '400'}}>Show Items</Text>  
+        </View> 
+      </TouchableOpacity>
+    </View>    
+  )
 
   return (
     <View style={styles.container}>
@@ -34,7 +46,10 @@ export default Home = props => {
         </View>        
         <Icon size={20} name="ellipsis-v" color='black' style={{paddingLeft: 15, paddingRight: 5}}/>
       </Header>
-      <Items {...props}/>
+      { itemsShown?  
+      <Items {...props}/>: 
+      buttonShow
+      }
     </View>
   );
 }
@@ -67,5 +82,13 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     marginRight: 10
-  }
+  },
+  buttonShow: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    borderColor: Colors.orangered,      
+    borderRadius: 30,
+    borderWidth: 2,
+  },
 });
