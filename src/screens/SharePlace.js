@@ -15,7 +15,7 @@ const Shareplace = props => {
   const onAddPlace = () => {
     if( placename.trim() !== '' )
       dispatch(addPlace(placename))
-    props.navigation.navigate('Home')
+    //props.navigation.navigate('Home')
   }
 
   let image = {
