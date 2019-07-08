@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FlatList, StyleSheet, Text } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 import ListItem from '../ListItem/ListItem'
 import PlacesContext from '../../store/contexts/placesContext';
 
@@ -21,11 +21,11 @@ export default items = props => {
           {...props}   
         />
       )}
-    />
+    />    
   );
 }
 
-const styles = StyleSheet.create({  
+const styles = StyleSheet.create({    
   containerWrapper: {
     width: '100%',
   },
