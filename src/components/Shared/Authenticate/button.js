@@ -5,7 +5,7 @@ import { Colors } from '../../../assets/staticStyles';
 
 const ButtonAuth = props => {
   return(
-    <TouchableOpacity onPress={ props.pressed } style={{marginTop: 20}}>
+    <TouchableOpacity onPress={ props.pressed } style={{marginTop: 20}} disabled={!props.able}>
       <View style={{ ...styles.buttonForm }}>
         <Text style={{ color: Colors.grayOne, fontSize: 23, fontWeight: '400'}}>{props.text}</Text>  
       </View> 

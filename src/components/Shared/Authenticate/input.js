@@ -6,15 +6,18 @@ import { Colors } from '../../../assets/staticStyles';
 
 const Input = props => {
   return(
-    <View style={{...styles.inputContainer, marginTop: 15}}>
+    <View style={[{...styles.inputContainer, marginTop: 15}, props.valid? {}: {backgroundColor: Colors.redTransparent}]}>
       <View style={styles.iconContainer}>
         <Icon size={25} name={props.iconName} style={styles.icon}/>
       </View>
       <TextInput 
         placeholder={props.placeholder}             
         placeholderTextColor={Colors.grayOne} 
-        secureTextEntry={true}
-        style={styles.inputLogin}/>          
+        secureTextEntry={props.isPassword}
+        style={styles.inputLogin}
+        value={props.value}
+        onChangeText={(value) => props.valueChanged(value)}
+      />  
     </View>
   )
 }
