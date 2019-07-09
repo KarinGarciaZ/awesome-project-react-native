@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, Text, ScrollView, TextInput, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native';
+import {View, Text, ScrollView, TextInput, StyleSheet, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Input from '../components/Shared/Authenticate/input';
@@ -159,7 +159,7 @@ const SignIn = (props) => {
     <ImageBackground source={backgroundImage} style={{width: '100%', flex: 1}}>
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.formContainer}>
+          <KeyboardAvoidingView style={styles.formContainer} behavior='padding'>
 
             <Icon size={50} name="user-plus" style={{color: Colors.grayOne, marginBottom: 10}}/>
 
@@ -169,7 +169,7 @@ const SignIn = (props) => {
 
             <ButtonAuth text="Sign in" pressed={logged} able={formState.valid}/>
 
-          </View>   
+          </KeyboardAvoidingView>   
         </ScrollView>         
       </View>
     </ImageBackground>

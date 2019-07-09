@@ -17,6 +17,9 @@ const Input = props => {
         style={styles.inputLogin}
         value={props.value}
         onChangeText={(value) => props.valueChanged(value)}
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType='email-address'
       />  
     </View>
   )
