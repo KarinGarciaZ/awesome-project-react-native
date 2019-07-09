@@ -16,6 +16,7 @@ const SignIn = (props) => {
         iconName:'user',
         placeholder:'Your first name...',
         valid: false,
+        touched: false,
         type: 'text',
         validation: {
           required: true
@@ -26,6 +27,7 @@ const SignIn = (props) => {
         iconName:'user',
         placeholder:'Your last name...',
         valid: false,
+        touched: false,
         type: 'text',
         validation: {
           required: true
@@ -36,6 +38,7 @@ const SignIn = (props) => {
         iconName:'envelope',
         placeholder:'Your email address...',
         valid: false,
+        touched: false,
         type: 'text',
         validation: {
           isEmail: true
@@ -46,6 +49,7 @@ const SignIn = (props) => {
         iconName:'lock',
         placeholder:'Password...',
         valid: false,
+        touched: false,
         type: 'password',
         validation: {
           minLength: 6,
@@ -57,6 +61,7 @@ const SignIn = (props) => {
         iconName:'lock',
         placeholder:'Confirm password...',
         valid: false,
+        touched: false,
         type: 'password',
         validation: {
           minLength: 6,          
@@ -120,6 +125,7 @@ const SignIn = (props) => {
   const onChangeValue = ( key, value ) => {
     let formStateCopy = { ...formState }    
     formStateCopy.controls[key].value = value;
+    formStateCopy.controls[key].touched = true;
 
     formStateCopy.controls[key].valid = validateField( key, formStateCopy.controls[key] )
     formStateCopy.valid = validateForm(formStateCopy)
@@ -133,6 +139,11 @@ const SignIn = (props) => {
   }
 
   let inputs = controls.map( element => {
+
+    let valid = element.control.valid
+    if( !valid && !element.control.touched )
+      valid = true;
+
     return <Input 
       iconName={element.control.iconName} 
       placeholder={element.control.placeholder} 
@@ -140,7 +151,7 @@ const SignIn = (props) => {
       valueChanged={ ( value ) => onChangeValue( element.key, value ) }
       isPassword={element.control.type === 'password'}
       key={element.key}
-      valid={element.control.valid}
+      valid={valid}
     />
   })
 
