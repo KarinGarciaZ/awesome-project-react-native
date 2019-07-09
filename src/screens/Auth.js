@@ -31,7 +31,7 @@ const Auth = (props) => {
 
             <Input iconName="lock" placeholder="Password..."/>
 
-            <ButtonAuth text="Login" pressed={logged}/> 
+            <ButtonAuth text="Login" pressed={logged} able={true}/> 
 
             <View style={styles.separator}>    
               <View style={styles.separatorLine} />      
@@ -39,7 +39,7 @@ const Auth = (props) => {
               <View style={styles.separatorLine} />     
             </View>  
 
-            <ButtonAuth text="Sign in" pressed={toSign}/>
+            <ButtonAuth text="Sign in" pressed={toSign} able={true}/>
 
           </View>   
         </ScrollView>           
