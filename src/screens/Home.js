@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, View, Button, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Button, Text, TextInput, TouchableOpacity, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Items from '../components/Items/items';
@@ -14,6 +14,8 @@ export default Home = props => {
   let [search, setSearch] = useState('');  
   const [itemsShown, showItems] = useState(false);
   let [state, dispatch] = useContext(ContextPlaces);
+  let [removeAnim, setRemoveAnim] = useState( new Animated.Value(1) )
+  let [placesAnim, setPlacesAnim] = useState( new Animated.Value(0) )
 
   const onAddPlace = () => {
     if( search.trim() !== '' )
@@ -24,14 +26,35 @@ export default Home = props => {
     props.navigation.navigate('About', { name:'karin' })
   }
 
+  const showItemsAndHideButtonTwo = () => {
+    Animated.timing( placesAnim, {
+      toValue: 1,
+      duration: 900,
+      useNativeDriver: true
+    } ).start()
+  } 
+
+  const showItemsAndHideButton = () => {
+    Animated.timing(removeAnim, {
+      toValue: 0,
+      duration: 600,
+      useNativeDriver: true
+    }).start(() => {
+      showItems(true)
+      showItemsAndHideButtonTwo()
+    });
+  } 
+
   let buttonShow = (
-    <View style={{ flex: 1, justifyContent: 'center' }}>
-      <TouchableOpacity onPress={ () => showItems(true) } style={{marginTop: 20}}>
-        <View style={{ ...styles.buttonShow }}>
-          <Text style={{ color: Colors.garyDark, fontSize: 23, fontWeight: '400'}}>Show Items</Text>  
-        </View> 
-      </TouchableOpacity>
-    </View>    
+    <Animated.View style={{transform: [ { scale: removeAnim } ] }}>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <TouchableOpacity onPress={ () => showItemsAndHideButton() } style={{marginTop: 20}}>
+          <View style={{ ...styles.buttonShow }}>
+            <Text style={{ color: Colors.garyDark, fontSize: 23, fontWeight: '400'}}>Show Items</Text>  
+          </View> 
+        </TouchableOpacity>
+      </View>    
+    </Animated.View>
   )
 
   return (
@@ -47,7 +70,9 @@ export default Home = props => {
         <Icon size={20} name="ellipsis-v" color='black' style={{paddingLeft: 15, paddingRight: 5}}/>
       </Header>
       { itemsShown?  
-      <Items {...props}/>: 
+        <Animated.View style={{ opacity: placesAnim, width: '100%' }}>
+          <Items {...props}/>
+        </Animated.View>:
       buttonShow
       }
     </View>
