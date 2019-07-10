@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, ScrollView, View, Button, Image, TextInput, Text } from 'react-native';
+import { StyleSheet, ScrollView, View, Button, Image, TextInput, Text, Dimensions } from 'react-native';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 import ContextPlaces from '../store/contexts/placesContext';
 import { addPlace } from '../store/actions/placesActions';
@@ -11,6 +12,15 @@ const Shareplace = props => {
 
   const [placename, setPlaceName] = useState('');
   const [state, dispatch] = useContext(ContextPlaces);
+  const [location, setLocation] = useState({
+    latitude: 37.7900352,
+    longitude: -122.4013726,
+    latitudeDelta: 0.0122,
+    longitudeDelta: 
+      Dimensions.get('window').width / 
+      Dimensions.get('window').height * 
+      0.0122,
+  })
 
   const onAddPlace = () => {
     if( placename.trim() !== '' )
@@ -40,6 +50,11 @@ const Shareplace = props => {
 
           <View style={ styles.imageContainer }>
             <Text style={styles.text}>Mapa</Text>
+            <MapView
+            provider={PROVIDER_GOOGLE}
+            initialRegion={location}
+            style={{width: '100%', height: 250}}
+            />
           </View>   
 
           <Button title='Add Place'/>
