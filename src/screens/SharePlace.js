@@ -53,7 +53,7 @@ const Shareplace = props => {
             <MapView
             provider={PROVIDER_GOOGLE}
             initialRegion={location}
-            style={{width: '100%', height: 250}}
+            style={{width: '100%', flex:1}}
             />
           </View>   
 
