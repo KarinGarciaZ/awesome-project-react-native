@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, ScrollView, View, Button, Image, TextInput, Text, Dimensions } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 import ContextPlaces from '../store/contexts/placesContext';
 import { addPlace } from '../store/actions/placesActions';
@@ -11,6 +11,7 @@ import Header from '../components/Shared/Header';
 const Shareplace = props => {
 
   const [placename, setPlaceName] = useState('');
+  const [locationChosen, setLocationChosen] = useState(false);
   const [state, dispatch] = useContext(ContextPlaces);
   const [location, setLocation] = useState({
     latitude: 37.7900352,
@@ -28,9 +29,48 @@ const Shareplace = props => {
     //props.navigation.navigate('Home')
   }
 
+  const getLocationHandler = () => {
+    navigator.geolocation.getCurrentPosition( 
+      pos => {
+        pickLocationHandler({
+          nativeEvent: {
+            coordinate: {
+              latitude: pos.coords.latitude,
+              longitude: pos.coords.longitude
+            }
+          }
+        })
+      },
+      err => {
+        console.log(err);
+        alert('There was a problem getting your position, pickit manually.')
+      }
+    )
+  }
+
+  const pickLocationHandler = event => {
+    const coords = event.nativeEvent.coordinate;
+    map.animateToRegion({
+      ...location,
+      latitude: coords.latitude,
+      longitude: coords.longitude
+    })
+    setLocation({
+      ...location,
+      latitude: coords.latitude,
+      longitude: coords.longitude
+    });
+    setLocationChosen(true);
+  }
+
   let image = {
     uri: 'https://cdn.muenchen-p.de/.imaging/stk/responsive/galleryLarge/dms/shutterstock/neues-rathaus-marienplatz/document/neues-rathaus-marienplatz.jpg'
   }
+
+  let marker = null;
+
+  if( locationChosen )
+    marker = <Marker coordinate={location}/>
 
   return(
     <View>
@@ -50,13 +90,17 @@ const Shareplace = props => {
 
           <View style={ styles.imageContainer }>
             <Text style={styles.text}>Mapa</Text>
-            <MapView            
-            initialRegion={location}
-            style={{width: '100%', flex:1}}
-            />
+            <MapView 
+              initialRegion={location} 
+              style={{width: '100%', flex:1}} 
+              onPress={pickLocationHandler}
+              ref={ref => map = ref }
+              >
+              {marker}
+            </MapView>
           </View>   
 
-          <Button title='Add Place'/>
+          <Button title='Get Location' onPress={getLocationHandler}/>
 
           <TextInput 
             placeholder='Place name...'
