@@ -25,7 +25,7 @@ const Shareplace = props => {
 
   const onAddPlace = () => {
     if( placename.trim() !== '' )
-      dispatch(addPlace(placename))
+      dispatch(addPlace({placename, location}))
     //props.navigation.navigate('Home')
   }
 
