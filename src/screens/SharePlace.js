@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, ScrollView, View, Button, Image, TextInput, Text, Dimensions } from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView from 'react-native-maps';
 
 import ContextPlaces from '../store/contexts/placesContext';
 import { addPlace } from '../store/actions/placesActions';
@@ -50,8 +50,7 @@ const Shareplace = props => {
 
           <View style={ styles.imageContainer }>
             <Text style={styles.text}>Mapa</Text>
-            <MapView
-            provider={PROVIDER_GOOGLE}
+            <MapView            
             initialRegion={location}
             style={{width: '100%', flex:1}}
             />
