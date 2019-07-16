@@ -26,8 +26,10 @@ const Shareplace = props => {
   })
 
   const onAddPlace = () => {
-    if( placename.trim() !== '' )
-      dispatch(addPlace({placename, location}))
+    if( placename.trim() !== '' && imagePicked )
+      dispatch(addPlace({placename, location, imagePicked}))
+    else
+      alert('fill all fields please')
     //props.navigation.navigate('Home')
   }
 
@@ -52,6 +54,7 @@ const Shareplace = props => {
 
   const pickImageHandler = () => {
     ImagePicker.showImagePicker({title: 'Select Avatar', customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }]}, res => {
+      console.log(res)
       if (res.didCancel) {
         alert('User cancelled image picker');
       } else if (res.error) {

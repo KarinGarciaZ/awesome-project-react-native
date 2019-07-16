@@ -8,9 +8,7 @@ const reducer = ( state, action ) => {
         key: Math.random(), 
         value: action.payload.placename, 
         location: action.payload.location,
-        image: {
-          uri:'https://cdn.muenchen-p.de/.imaging/stk/responsive/galleryLarge/dms/shutterstock/neues-rathaus-marienplatz/document/neues-rathaus-marienplatz.jpg'
-        }
+        image: action.payload.imagePicked
       })
       return {
         ...state, 
