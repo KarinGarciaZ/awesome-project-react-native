@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, ScrollView, View, Button, Image, TextInput, Text, Dimensions } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import ImagePicker from 'react-native-image-picker';
 
 import ContextPlaces from '../store/contexts/placesContext';
 import { addPlace } from '../store/actions/placesActions';
@@ -10,9 +11,10 @@ import Header from '../components/Shared/Header';
 
 const Shareplace = props => {
 
-  const [placename, setPlaceName] = useState('');
-  const [locationChosen, setLocationChosen] = useState(false);
   const [state, dispatch] = useContext(ContextPlaces);
+  const [placename, setPlaceName] = useState('');
+  const [imagePicked, setImagePicked] = useState(null)
+  const [locationChosen, setLocationChosen] = useState(false);
   const [location, setLocation] = useState({
     latitude: 37.7900352,
     longitude: -122.4013726,
@@ -24,8 +26,10 @@ const Shareplace = props => {
   })
 
   const onAddPlace = () => {
-    if( placename.trim() !== '' )
-      dispatch(addPlace({placename, location}))
+    if( placename.trim() !== '' && imagePicked )
+      dispatch(addPlace({placename, location, imagePicked}))
+    else
+      alert('fill all fields please')
     //props.navigation.navigate('Home')
   }
 
@@ -46,6 +50,22 @@ const Shareplace = props => {
         alert('There was a problem getting your position, pickit manually.')
       }
     )
+  }
+
+  const pickImageHandler = () => {
+    ImagePicker.showImagePicker({title: 'Select Avatar', customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }]}, res => {
+      console.log(res)
+      if (res.didCancel) {
+        alert('User cancelled image picker');
+      } else if (res.error) {
+        alert('ImagePicker Error: ', res.error);
+      } else if (res.customButton) {
+        alert('User tapped custom button: ', res.customButton);
+      } else {
+        const source = { uri: res.uri };
+        setImagePicked(source)
+      }
+    })
   }
 
   const pickLocationHandler = event => {
@@ -83,10 +103,10 @@ const Shareplace = props => {
         <View style={ styles.container } >
           <View style={ styles.imageContainer }>
             <Text style={styles.text}>Imagen</Text>
-            <Image style={styles.image} source={image}/>
+            <Image style={styles.image} source={imagePicked}/>
           </View>       
 
-          <Button title='Add Image'/>
+          <Button title='Add Image' onPress={pickImageHandler}/>
 
           <View style={ styles.imageContainer }>
             <Text style={styles.text}>Mapa</Text>
